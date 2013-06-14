@@ -30,6 +30,9 @@
 #import "OAuth+Additions.h"
 #import "TWAPIManager.h"
 #import "TWSignedRequest.h"
+#ifndef TWDLog
+#define TWDLog NSLog
+#endif
 
 typedef void(^TWAPIHandler)(NSData *data, NSError *error);
 
