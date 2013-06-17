@@ -132,4 +132,14 @@ static NSString *gTWConsumerSecret;
     return gTWConsumerSecret;
 }
 
++ (void)setConsumerSecret:(NSString *)secret
+{
+    gTWConsumerSecret = secret;
+}
+
++ (void)setConsumerKey:(NSString *)key
+{
+    gTWConsumerKey = key;
+}
+
 @end
