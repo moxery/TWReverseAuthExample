@@ -66,7 +66,10 @@ typedef void(^TWAPIHandler)(NSData *data, NSError *error);
      *  from Twitter.framework.
      */
     TWDLog(@"We're running in the Simulator. Using fallback check via Twitter.framework");
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     available = [TWTweetComposeViewController canSendTweet];
+#pragma clang diagnostic pop
 
 #else
 
@@ -98,14 +101,8 @@ typedef void(^TWAPIHandler)(NSData *data, NSError *error);
     NSParameterAssert(dict);
     NSParameterAssert(requestMethod);
 
-    if ([SLRequest class]) {
-        TWDLog(@"Using request class: SLRequest\n");
-        return (id<GenericTwitterRequest>) [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:requestMethod URL:url parameters:dict];
-    }
-    else {
-        TWDLog(@"Using request class: TWRequest\n");
-        return (id<GenericTwitterRequest>) [[TWRequest alloc] initWithURL:url parameters:dict requestMethod:requestMethod];
-    }
+    TWDLog(@"Using request class: SLRequest\n");
+    return (id<GenericTwitterRequest>) [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:requestMethod URL:url parameters:dict];
 }
 
 /**
